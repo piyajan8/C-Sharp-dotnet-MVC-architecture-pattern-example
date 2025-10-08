@@ -1,0 +1,51 @@
+@model FoodQuizGame.Models.ViewModels.ResultViewModel
+@{
+    ViewData["Title"] = "ผลลัพธ์";
+}
+
+<div class="max-w-2xl mx-auto text-center">
+    <div class="mb-8">
+        <div class="text-9xl bounce">@Model.ResultEmoji</div>
+    </div>
+
+    @if (Model.Score == 5)
+    {
+        <h1 class="text-4xl font-bold mb-4 text-green-500">สุดยอด! 🎉</h1>
+    }
+    else if (Model.Score >= 3)
+    {
+        <h1 class="text-4xl font-bold mb-4 text-blue-500">เก่งมาก! 😊</h1>
+    }
+    else
+    {
+        <h1 class="text-4xl font-bold mb-4 text-orange-500">ลองใหม่นะ! 💪</h1>
+    }
+
+    <p class="text-xl @Model.ResultColor mb-8">@Model.ResultMessage</p>
+
+    <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 mb-8">
+        <div class="text-6xl font-bold gradient-text mb-4">
+            @Model.Score/@Model.TotalQuestions
+        </div>
+        <p class="text-lg text-gray-600">คะแนนของ @Model.PlayerName</p>
+    </div>
+
+    <div class="flex justify-center space-x-4 mb-8">
+        @for (int i = 0; i < 5; i++)
+        {
+            if (i < Model.Score)
+            {
+                <div class="text-4xl">🍕</div>
+            }
+            else
+            {
+                <div class="text-4xl opacity-30">🍕</div>
+            }
+        }
+    </div>
+
+    <a asp-action="Start" 
+       class="inline-block bg-gradient-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white font-bold py-4 px-8 rounded-full text-xl transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+        เล่นอีกครั้ง! 🔄
+    </a>
+</div>
